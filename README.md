@@ -9,4 +9,4 @@ Esbuild is a next-generation JavaScript bundler aimed at improving build tool pe
 UNPKG is a fast, global content delivery network for everything on npm(<a href="https://unpkg.com/">URL</a>)
 
 ## Monaco Editor
-The Monaco Editor is the code editor that powers VS Code. A good page describing the code editor's features is here. <a href="https://microsoft.github.io/monaco-editor/">URL</a>
+The Monaco Editor is the code editor that powers VS Code. A good page describing the code editor's features is here. (<a href="https://microsoft.github.io/monaco-editor/">URL</a>)
