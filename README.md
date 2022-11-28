@@ -10,3 +10,6 @@ UNPKG is a fast, global content delivery network for everything on npm(<a href="
 
 ## Monaco Editor
 The Monaco Editor is the code editor that powers VS Code. A good page describing the code editor's features is here. (<a href="https://microsoft.github.io/monaco-editor/">URL</a>)
+
+## Prettier 
+Prettier is an opinionated code formatter (<a href="https://prettier.io/">URL</a>)
