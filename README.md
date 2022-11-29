@@ -13,3 +13,6 @@ The Monaco Editor is the code editor that powers VS Code. A good page describing
 
 ## Prettier 
 Prettier is an opinionated code formatter (<a href="https://prettier.io/">URL</a>)
+
+## Bulmaswatch
+Bulmaswatch is free themes for Bulma (<a href="https://jenil.github.io/bulmaswatch/">URL</a>)
