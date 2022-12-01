@@ -16,3 +16,6 @@ Prettier is an opinionated code formatter (<a href="https://prettier.io/">URL</a
 
 ## Bulmaswatch
 Bulmaswatch is free themes for Bulma (<a href="https://jenil.github.io/bulmaswatch/">URL</a>)
+
+## React-Resizable
+React-Resizable A simple widget that can be resized via one or more handles. (<a href="https://www.npmjs.com/package/react-resizable">URL</a>)
