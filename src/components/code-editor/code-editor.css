@@ -1,6 +1,6 @@
 .editor-wrapper {
   position: relative;
-  width: 100%;
+  width: calc(100% - 10px);
   height: 100%;
 }
 .editor-wrapper .button-format {
@@ -11,6 +11,6 @@
   opacity: 0;
   transition: all 0.3s;
 }
-.editor-wrapper:hover .button-format {
+.editor-wrapper:hover .button-format { 
   opacity: 1;
 }
