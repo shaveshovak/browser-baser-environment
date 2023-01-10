@@ -19,3 +19,6 @@ Bulmaswatch is free themes for Bulma (<a href="https://jenil.github.io/bulmaswat
 
 ## React-Resizable
 React-Resizable A simple widget that can be resized via one or more handles. (<a href="https://www.npmjs.com/package/react-resizable">URL</a>)
+
+## Markdown Editor
+A simple markdown editor with preview, implemented with React.js and TypeScript. (<a href="https://www.npmjs.com/package/@uiw/react-md-editor">URL</a>)
