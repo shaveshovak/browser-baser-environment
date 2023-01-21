@@ -22,3 +22,6 @@ React-Resizable A simple widget that can be resized via one or more handles. (<a
 
 ## Markdown Editor
 A simple markdown editor with preview, implemented with React.js and TypeScript. (<a href="https://www.npmjs.com/package/@uiw/react-md-editor">URL</a>)
+
+## Immer 
+Immer (German for: always) is a tiny package that allows you to work with immutable state in a more convenient way. (<a href="https://immerjs.github.io/immer/">URL</a>)
