@@ -1,20 +1,23 @@
 import { useEffect, useState, useRef  } from "react";
 import MDEditor  from "@uiw/react-md-editor";
+import { useActions } from '../../hooks/use-action';
+import { Cell } from "../../state";
 import './text-editor.css';
 
-const TextEditor: React.FC = () => {
+interface TextEditorProps {
+    cell: Cell;
+};
 
+const TextEditor: React.FC<TextEditorProps> = ({ cell }) => {
     const ref = useRef<HTMLDivElement | null>(null)
     const [editing, setEditing] = useState(false);
-    const [value, setValue] = useState('# Header');
+    const { updateCell } = useActions();
 
     useEffect(() => {
         const listener = (e: MouseEvent) => {
             if(ref.current && e.target && ref.current.contains(e.target as Node)) {
-                // console.log('Element is inside the editor');
                 return;
             }
-            // console.log('Element is not inside the editor');
             setEditing(false);
         }
         document.addEventListener('click', listener, { capture: true });
@@ -28,8 +31,8 @@ const TextEditor: React.FC = () => {
         return (
             <div className='text-editor' ref={ref}>
                 <MDEditor
-                    value={value}
-                    onChange={(v) => setValue(v || '')}
+                    value={cell.content}
+                    onChange={(v) => updateCell(cell.id, v || '')}
                 />
             </div> 
         )
@@ -40,7 +43,7 @@ const TextEditor: React.FC = () => {
             onClick={() => setEditing(true)}
         >
             <div className='card-content'>
-                <MDEditor.Markdown source={value} />
+                <MDEditor.Markdown source={cell.content || 'Click to edit'} />
             </div>
         </div>
     )

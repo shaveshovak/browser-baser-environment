@@ -19,7 +19,7 @@ const initialState: CellsState = {
     data: {}
 };
 
-const reducer = produce((state: CellsState = initialState, action: Action): CellsState | undefined => {
+const reducer = produce((state: CellsState = initialState, action: Action) => {
     switch(action.type) {
         case ActionType.UPDATE_CELL: 
 
@@ -68,7 +68,7 @@ const reducer = produce((state: CellsState = initialState, action: Action): Cell
         default: 
             return state;
     }
-});
+}, initialState);
 
 const randomId = () =>{
     return Math.random().toString(36).substr(2, 5);
