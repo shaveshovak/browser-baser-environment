@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useTypedSelector } from '../../hooks/use-typed.selector';
 import CodeEditor from '../code-editor/code-editor';
 import { useActions } from '../../hooks/use-action';
 import Resizable from '../resizable/resizable';
 import Preview from '../preview/preview';
-import bundler from '../../bundler';
 import { Cell } from '../../state';
 import './code-cell.css';
 
@@ -12,21 +12,59 @@ interface CodeCellProps {
 };
 
 const CodeCell:React.FC<CodeCellProps> = ({ cell }) => {
-  const [code, setCode] = useState('');
-  const [err, setErr] = useState('');
-  const { updateCell } = useActions();
+  const { updateCell, createBundle } = useActions();
+  const bundle = useTypedSelector((state) => state.bundles[cell.id]);
+
+  const cumulativeCode = useTypedSelector((state) => {
+    const { data, order } = state.cells;
+
+    const orderedCells = order.map(id => data[id]);
+
+    const cumulativeCode = [
+      `
+        import React from 'react';
+        import ReactDOM from 'react-dom';
+
+        const show = (value) => {
+          const root = document.querySelector('#root');
+
+          if(typeof value === 'object') {
+            if(value.$$typeof && value.props) {
+              ReactDOM.render(value, root);
+            } else {
+              root.innerHTML = JSON.stringify(value);
+            }
+          }
+          root.innerHTML = value;
+        };
+      `
+    ];
+    for(let c of orderedCells) {
+      if(c.type === 'code') {
+        cumulativeCode.push(c.content);
+      }
+      if(c.id === cell.id){
+        break;
+      }
+    }
+    return cumulativeCode;
+  });
 
   useEffect(() => {
+    if(!bundle) {
+      createBundle(cell.id, cumulativeCode.join('\n'));
+      return;
+    }
     const timer = setTimeout(async () => {
-      const output = await bundler(cell.content);
-      setCode(output.code);
-      setErr(output.err);
+      createBundle(cell.id, cumulativeCode.join('\n'));
     }, 750);
 
     return () => {
       clearTimeout(timer);
     };
-  }, [cell.content]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cumulativeCode.join('\n'), cell.id, createBundle]);
 
   return (
     <Resizable direction='vertical'>
@@ -37,7 +75,18 @@ const CodeCell:React.FC<CodeCellProps> = ({ cell }) => {
             onChange={(value) => updateCell(cell.id, value)}
           />
         </Resizable>
-        <Preview code={code} bundlingStatus={err} />
+        <div className='progress-wrapper'>
+          {
+            !bundle || bundle.loading 
+            ? 
+                <div className='progress-cover'>
+                  <progress className='progress is-small is-primary' max='100'>
+                    Loading
+                  </progress>
+                </div>
+            : <Preview code={bundle.code} bundlingStatus={bundle.err} />
+          }
+        </div>
       </div>
     </Resizable>
   )
