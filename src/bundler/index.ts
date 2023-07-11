@@ -27,7 +27,7 @@ export default async (rawCode: string) => {
         global: 'window'
       },
       jsxFactory: '_React.createElement',
-      jsxFragment: '_React. Fragment'
+      jsxFragment: '_React.Fragment'
     });
 
     return {
